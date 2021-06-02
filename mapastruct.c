@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#define tam 5
+#define qtd 5
 
-struct taluno{
-	char ra[10];
-	char matricula[10];
+struct atividades{
+	int RA[10];
+	int matProf[10];
 	char nome[30];
-	int arquivo[10];  
+	char extArq[10];
 };
 
 struct tfila{
-	struct taluno dados[tam];
+	struct atividades dados[qtd];
 	int ini;
 	int fim;
 };
+struct atividades atv1;
 struct tfila fila;
 int op;
 void fila_entrar();
@@ -51,22 +52,22 @@ return(0);
 }
 
 void fila_entrar(){
-	if(fila.fim == tam){
+	if(fila.fim == qtd){
  		printf("\n\n*************************** A FILA ESTÁ CHEIA! ************************\n\n");
 		system("pause");
 		} else{
 			printf("Digite o RA DO ALUNO: ");
- 			scanf("%s", fila.dados[fila.fim].ra);
+ 			scanf("%s", fila.dados[fila.fim].RA);
  			printf("Digite o NOME DO ALUNO: ");
- 			scanf("%s", fila.dados[fila.fim].nome);
  			fflush(stdin);
- 			fflush(stdin);
+ 			fgets(fila.dados[fila.fim].nome, 30,stdin);
+			//scanf("%s", fila.dados[fila.fim].nome);
  			printf("Digite a EXTENSÃO do arquivo: ");
- 			scanf("%s", fila.dados[fila.fim].arquivo);
+ 			scanf("%s", fila.dados[fila.fim].extArq);
  			printf("Digite a MATRÍCULA do professor: ");
- 			scanf("%s", fila.dados[fila.fim].matricula);
+ 			scanf("%s", fila.dados[fila.fim].matProf);
  			fflush(stdin);
- 			fila.fim++;
+ 			fila.fim++; 
 			}
 	}
 void fila_sair(){
@@ -76,7 +77,7 @@ void fila_sair(){
 	} else{
  		int i;
 
- 		for (i = 0; i < tam; i++){
+ 		for (i = 0; i < qtd; i++){
   		fila.dados[i] = fila.dados[i+1];
  		}
  	fila.dados[fila.fim];
@@ -87,12 +88,14 @@ void fila_encerrar(){
 }
 void fila_mostrar(){
 	int i;
-	printf("*********************************************** \n\n");
-	for(i=0; i<tam; i++){
- 	printf("RA do Aluno: %s\n", fila.dados[i].ra);
- 	printf("NOME DO ALUNO: %s\n", fila.dados[i].nome);
-	printf("EXTENSÃO DO ARQUIVO: %s\n", fila.dados[i].arquivo);
-	printf("MATRÍCULA DO PROFESSOR: %s\n\n", fila.dados[i].matricula);
+	
+	printf("*********************LISTA********************** \n\n");
+	
+	for(i=0; i<fila.fim; i++){
+ 				printf("\n >RA do Aluno: %s\n", fila.dados[i].RA);
+ 				printf("\n >NOME DO ALUNO: %s\n", fila.dados[i].nome);
+				printf(" >EXTENSÃO DO ARQUIVO: %s\n", fila.dados[i].extArq);
+				printf("\n >MATRÍCULA DO PROFESSOR: %s\n\n", fila.dados[i].matProf);	
 	}
 	printf("************************************************\n\n");
 }
@@ -102,5 +105,4 @@ void menu_mostrar(){
 	printf("2 - Remover elemento da Fila\n");
 	printf("3 - Limpar a Fila\n");
 	printf("0 - ENCERRAR O PROGRAMA\n\n");
-
 }
