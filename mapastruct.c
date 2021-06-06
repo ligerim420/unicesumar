@@ -16,63 +16,63 @@ struct tfila{
 	int fim;
 };
 struct atividades atv1;
+struct atividades *a;
 struct tfila fila;
+struct tfila *f;
 int op;
-void fila_entrar();
-void fila_sair();
-void fila_encerrar();
-void fila_mostrar();
-void menu_mostrar();
+void insert();
+void remv();
+void show();
+void menu();
+void clear();
 
 int main(){
 
-	setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "Portugues");
 
 	op = 1;
 	fila.ini = 0;
 	fila.fim = 0;
 while(op != 0) {
  system("cls");
- fila_mostrar();
- menu_mostrar();
+ show();
+ menu();
  scanf("%d", &op);
  switch(op){
   case 1:
-	  fila_entrar();
+	  insert();
   break;
   case 2:
-	  fila_sair();
+		remv();
   break;
   case 3:
-	  fila_encerrar();
+	  clear();
   break;
  }
 }
 return(0);
 }
 
-void fila_entrar(){
+void insert(){
 	if(fila.fim == qtd){
- 		printf("\n\n*************************** A FILA ESTÁ CHEIA! ************************\n\n");
+ 		printf("\n\n********** !!A FILA ESTA CHEIA!! ***********\n\n");
 		system("pause");
 		} else{
-			printf("Digite o RA DO ALUNO: ");
+			system("cls");
+			printf("Digite o RA do aluno: ");
  			scanf("%s", fila.dados[fila.fim].RA);
- 			printf("Digite o NOME DO ALUNO: ");
- 			fflush(stdin);
+ 			printf("Digite o nome do aluno: ");fflush(stdin);
  			fgets(fila.dados[fila.fim].nome, 30,stdin);
-			//scanf("%s", fila.dados[fila.fim].nome);
- 			printf("Digite a EXTENSÃO do arquivo: ");
+ 			printf("Digite a extensao do arquivo: ");
  			scanf("%s", fila.dados[fila.fim].extArq);
- 			printf("Digite a MATRÍCULA do professor: ");
- 			scanf("%s", fila.dados[fila.fim].matProf);
- 			fflush(stdin);
- 			fila.fim++; 
+ 			printf("Digite a matricula do professor: ");
+ 			scanf("%s", fila.dados[fila.fim].matProf);fflush(stdin);
+ 			fila.fim++;
 			}
 	}
-void fila_sair(){
+void remv(){
 	if( fila.ini == fila.fim){
-	 	printf("\n\n************************* FILA VAZIA! ********************************\n\n");
+	 	printf("\n\n************* !!FILA VAZIA!! **************\n\n");
 		system("pause");
 	} else{
  		int i;
@@ -84,25 +84,42 @@ void fila_sair(){
  	fila.fim--;
 	}
 }
-void fila_encerrar(){
-}
-void fila_mostrar(){
+
+void show(){
 	int i;
 	
 	printf("*********************LISTA********************** \n\n");
 	
 	for(i=0; i<fila.fim; i++){
- 				printf("\n >RA do Aluno: %s\n", fila.dados[i].RA);
- 				printf("\n >NOME DO ALUNO: %s\n", fila.dados[i].nome);
-				printf(" >EXTENSÃO DO ARQUIVO: %s\n", fila.dados[i].extArq);
-				printf("\n >MATRÍCULA DO PROFESSOR: %s\n\n", fila.dados[i].matProf);	
+ 				printf("\n >RA do aluno: %s\n", fila.dados[i].RA);
+ 				printf("\n >Nome do aluno: %s\n", fila.dados[i].nome);
+				printf(" >Extensao do arquivo: %s\n", fila.dados[i].extArq);
+				printf("\n >Matricula do professor: %s\n\n", fila.dados[i].matProf);	
 	}
 	printf("************************************************\n\n");
 }
-void menu_mostrar(){
-	printf("\n*********************MENU:**********************\n\n");
-	printf("1 - Enserir novo elemento na Fila\n");
-	printf("2 - Remover elemento da Fila\n");
-	printf("3 - Limpar a Fila\n");
-	printf("0 - ENCERRAR O PROGRAMA\n\n");
+void menu(){
+	printf("*********************MENU:**********************\n\n");
+	printf("1- Inserir atividade\n");
+	printf("2- Remover atividade\n");
+	printf("3- Apagar lista de atividades\n");
+	printf("0- Sair\n\n");
+}
+void clear(){
+	
+		if( fila.ini == fila.fim){
+	 	printf("\n\n************* !!FILA VAZIA!! **************\n\n");
+		system("pause");
+	} else{
+ 		int i;
+	do{
+	
+ 		for (i = 0; i < fila.fim; i++){
+  		fila.dados[i] = fila.dados[i+1];
+ 		}
+ 		fila.dados[fila.fim];
+ 		fila.fim--;
+ }while(fila.fim > fila.ini);
+	}
+	
 }
